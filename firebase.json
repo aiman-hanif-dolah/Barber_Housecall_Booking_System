@@ -1,0 +1,39 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "techventura-fsktm",
+          "appId": "1:48191107498:android:135e78ac58eeba7d8dbbd3",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "techventura-fsktm",
+          "configurations": {
+            "android": "1:48191107498:android:135e78ac58eeba7d8dbbd3",
+            "ios": "1:48191107498:ios:3ad1ae2d202435948dbbd3",
+            "macos": "1:48191107498:ios:3ad1ae2d202435948dbbd3",
+            "web": "1:48191107498:web:16f7635d8478027d8dbbd3",
+            "windows": "1:48191107498:web:0c1bb79ddfdfe0e98dbbd3"
+          }
+        }
+      }
+    }
+  },
+  "hosting": {
+    "public": "build/web",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

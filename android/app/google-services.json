@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "48191107498",
+    "project_id": "techventura-fsktm",
+    "storage_bucket": "techventura-fsktm.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:48191107498:android:135e78ac58eeba7d8dbbd3",
+        "android_client_info": {
+          "package_name": "com.tv.barber_housecall"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_1RBhqNfxZBhLfyS5CgHi5tSCq5b-cWw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
