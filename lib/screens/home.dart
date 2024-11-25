@@ -40,6 +40,31 @@ class _HomeScreenState extends State<HomeScreen>
     }
   }
 
+  Future<void> _registerUser(String phone) async {
+    try {
+      // Here, we can register the user with basic information.
+      // For example, you can set a default role as 'customer' or ask the user for more details.
+      await FirebaseFirestore.instance.collection('users').add({
+        'phoneNumber': phone,
+        'role': 'customer',  // Default role can be 'customer', 'barber', etc.
+        // Add other necessary fields like name, email, etc.
+      });
+
+      setState(() {
+        _isBarber = false;  // Default to 'false' unless specified later.
+        _phoneNumber = phone;
+      });
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Registration successful!')),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Registration failed: ${e.toString()}')),
+      );
+    }
+  }
+
   Future<void> _logout() async {
     setState(() {
       _phoneNumber = null;
@@ -82,16 +107,15 @@ class _HomeScreenState extends State<HomeScreen>
           .get();
 
       if (userSnapshot.docs.isNotEmpty) {
+        // If user exists, proceed to login
         final userDoc = userSnapshot.docs.first;
         setState(() {
           _isBarber = userDoc['role'] == 'barber';
           _phoneNumber = phone;
         });
       } else {
-        // Handle the case where the user is not found in the collection
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('User not found. Please register.')),
-        );
+        // If user doesn't exist, proceed to register
+        await _registerUser(phone);
       }
     } catch (e) {
       if (!mounted) return;

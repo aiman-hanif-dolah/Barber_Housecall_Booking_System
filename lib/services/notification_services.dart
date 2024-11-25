@@ -1,44 +1,26 @@
-// services/notification_service.dart
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class NotificationService {
-  static final FlutterLocalNotificationsPlugin _localNotificationsPlugin =
+  static final FlutterLocalNotificationsPlugin _notificationsPlugin =
   FlutterLocalNotificationsPlugin();
 
   static Future<void> initialize() async {
-    // Android initialization
-    const AndroidInitializationSettings initializationSettingsAndroid =
+    const AndroidInitializationSettings androidSettings =
     AndroidInitializationSettings('@mipmap/ic_launcher');
 
-    // // iOS initialization
-    // IOSInitializationSettings initializationSettingsIOS =
-    // IOSInitializationSettings();
+    const DarwinInitializationSettings iosSettings =
+    DarwinInitializationSettings();
 
-    // Initialization settings
-    InitializationSettings initializationSettings = const InitializationSettings(
-      android: initializationSettingsAndroid,
-     );
-
-    await _localNotificationsPlugin.initialize(initializationSettings);
-  }
-
-  static Future<void> showNotification({
-    required int id,
-    required String title,
-    required String body,
-  }) async {
-    const AndroidNotificationDetails androidDetails = AndroidNotificationDetails(
-      'channel_id',
-      'channel_name',
-      channelDescription: 'channel_description',
-      importance: Importance.high,
-      priority: Priority.high,
+    const InitializationSettings settings = InitializationSettings(
+      android: androidSettings,
+      iOS: iosSettings, // Provide iOS-specific initialization
     );
 
-    const NotificationDetails platformDetails = NotificationDetails(
-      android: androidDetails,
+    await _notificationsPlugin.initialize(
+      settings,
+      onDidReceiveNotificationResponse: (NotificationResponse response) {
+        // Handle notification tap actions
+      },
     );
-
-    await _localNotificationsPlugin.show(id, title, body, platformDetails);
   }
 }
